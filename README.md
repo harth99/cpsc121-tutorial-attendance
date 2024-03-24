@@ -1,3 +1,5 @@
+***A script that I wrote to record attendance for a course that I'm TAing***
+
 ```
 scp -i /Users/jiayuhuang/Downloads/CPSC121Tutorials.pem ubuntu@54.176.150.108:/home/ubuntu/attendance/students.csv /Users/jiayuhuang/Desktop
 ```
