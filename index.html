@@ -1,0 +1,39 @@
+<!-- public/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+</head>
+<body>
+    <h1>T2F Attendance</h1>
+    <form action="/submit" method="post">
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName"><br><br>
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName"><br><br>
+        <label for="studentNumber">Student Number:</label><br>
+        <input type="text" id="studentNumber" name="studentNumber"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Attended Students</h2>
+    <ul id="studentList"></ul>
+
+    <script>
+        fetch('/students')
+            .then(response => response.json())
+            .then(data => {
+                const studentList = document.getElementById('studentList');
+                data.forEach(student => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${student.lastName[0]}, ${student.firstName[0]} - ${student.studentNumber}`;
+                    studentList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching students:', error));
+    </script>
+</body>
+</html>
