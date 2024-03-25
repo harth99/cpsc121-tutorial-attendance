@@ -8,7 +8,7 @@
     <title>Student Registration</title>
 </head>
 <body>
-    <h1>T2F Attendance</h1>
+    <h1>T2H Attendance</h1>
     <form action="/submit" method="post">
         <label for="lastName">Last Name:</label><br>
         <input type="text" id="lastName" name="lastName"><br><br>
@@ -19,8 +19,20 @@
         <button type="submit">Submit</button>
     </form>
 
+    <h2>Total Students: <span id="totalStudents"></span></h2> <!-- Display the total number of students here -->
+
     <h2>Attended Students</h2>
     <ul id="studentList"></ul>
+
+    <script>
+        // Fetch the total number of students from the server and update the HTML
+        fetch('/totalStudents')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalStudents').textContent = data.totalStudents;
+            })
+            .catch(error => console.error('Error fetching total students:', error));
+    </script>
 
     <script>
         fetch('/students')

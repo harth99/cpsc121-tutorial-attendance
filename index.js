@@ -28,6 +28,8 @@ app.use(express.static('public'));
 // Array to store student data
 let students = [];
 
+let totalStudents = 0; // Variable to store the total number of students
+
 // Route to serve HTML form
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
@@ -49,6 +51,9 @@ app.post('/submit', (req, res) => {
 
     students.push({ lastName, firstName, studentNumber });
 
+    // Increment the total number of students
+    totalStudents++;
+
     // Save to CSV after pushing the student record
     saveToCSV();
 
@@ -59,6 +64,11 @@ app.post('/submit', (req, res) => {
 // Route to get all students
 app.get('/students', (req, res) => {
     res.json(students);
+});
+
+// Route to get the total number of students
+app.get('/totalStudents', (req, res) => {
+    res.json({ totalStudents });
 });
 
 // Start the server
